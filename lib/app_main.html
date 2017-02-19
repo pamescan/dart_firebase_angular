@@ -1,7 +1,13 @@
-<h1>Index</h1>
-<nav>
-    <a [routerLink]="['Index']">Ini</a>
-    <a [routerLink]="['Error']">Error</a>
-</nav>
+<app-header></app-header>
 
-<router-outlet></router-outlet>
+<main class="mdl-layout__content">
+    <div id="container">
+        <nav>
+            <a [routerLink]="['Index']">Index</a>
+            <a [routerLink]="['Gallery']">Gallery</a>
+            <a [routerLink]="['Error']">Error</a>
+        </nav>
+
+        <router-outlet></router-outlet>
+    </div>
+</main>

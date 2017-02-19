@@ -1,0 +1,20 @@
+<header class="mdl-layout__header">
+    <div class="mdl-layout__header-row">
+        <span class="mdl-layout-title visible-desktop">Test</span>
+        <span class="mdl-layout-title visible-mobile">NB</span>
+        <div class="mdl-layout-spacer"></div>
+        <nav class="mdl-navigation">
+            <ul>
+                <li id="profile" >
+                    <img [hidden]="!showProfile"src="{{firebaseService.user?.photoURL}}" width="40"   height="40" ) >
+                    <p [hidden]="!showProfile"> {{firebaseService.user?.displayName}} ({{firebaseService.user?.email}})</p>
+                    <a [hidden]="!showProfile" href="#" class="mdl-button mdl-button--raised mdl-button--accent" (click)="onLogOut()">Sign Out</a>
+                </li>
+                <li id="login" >
+                    <a [hidden]="showProfile" href="#" class="mdl-button mdl-button--raised mdl-button--accent" (click)="onLogin()">Sign in with Google</a>
+
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>

@@ -10,71 +10,47 @@
 </head>
 <body class="mdl-color--grey-100 mdl-color-text--grey-700 mdl-base">
 <div class="mdl-layout mdl-layout--fixed-header">
-    <header class="mdl-layout__header">
-        <div class="mdl-layout__header-row">
-            <span class="mdl-layout-title visible-desktop">Test</span>
-            <span class="mdl-layout-title visible-mobile">NB</span>
-            <div class="mdl-layout-spacer"></div>
-            <nav class="mdl-navigation">
-                <ul>
-                    <li id="profile"></li>
-                    <li id="login" style="display: none">
-                        <a href="#" class="mdl-button mdl-button--raised mdl-button--accent">Sign in with Google</a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-    <main class="mdl-layout__content">
-        <div id="container">
-            <app-main></app-main>
-            <!--<div class="mdl-spinner mdl-spinner--single-color mdl-js-spinner"></div>
-            <form id="notes-form" style="display: none">
-                <div class="mdl-grid">
-                    <h2 class="mdl-cell mdl-cell--12-col">Add new awesome note</h2>
-                    <div class="mdl-cell mdl-cell--6-col mdl-cell--12-col-phone mdl-cell--12-col-tablet">
-                        <label for="new-note">Your awesome note<sup>*</sup></label><br>
-                        <input type="text" id="new-note-title" placeholder="Note title" disabled>
-                        <textarea placeholder="Note text" id="new-note" cols="10" rows="5" disabled></textarea>
-                    </div>
-                    <div class="mdl-cell mdl-cell--6-col mdl-cell--12-col-phone mdl-cell--12-col-tablet" id="note-image">
-                        <label for="upload-image">Attach image</label><br>
-                        <input type="file" id="upload-image" accept="image/*" disabled>
-                    </div>
-                    <div class="mdl-cell mdl-cell--12-col">
-                        <input type="submit" value="Add" id="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" disabled>
-                    </div>
-                </div>
-            </form>
-            <div id="notes" class="mdl-grid"></div>-->
-        </div>
-
-        <footer class="mdl-mini-footer">
-            <div class="mdl-mini-footer__left-section">
-                <div class="mdl-logo">Pamescan</div>
-                <div class="mdl-mega-footer__bottom-section">
-                    <p>This demo is written in Dart and uses Firebase.<br></p>
-                </div>
-                <ul class="mdl-mini-footer__link-list">
-                    <li><a href="https://www.dartlang.org/" target="_blank">Dart</a></li>
-                    <li><a href="https://firebase.google.com/" target="_blank">Firebase</a></li>
-                    <li><a href="https://pub.dartlang.org/packages/firebase" target="_blank">Firebase Dart</a></li>
-                    <li>Created by <a href="" target="_blank">Pablo Mestre Canto</a></li>
-                    <li>Based on  a <a href="https://twitter.com/Janamou" target="_blank">Jana Moudrá</a> Demo</li>
-                </ul>
+    <app-main>
+        <header class="mdl-layout__header">
+            <div class="mdl-layout__header-row">
+                <span class="mdl-layout-title visible-desktop">Test</span>
+                <span class="mdl-layout-title visible-mobile">NB</span>
+                <div class="mdl-layout-spacer"></div>
+                <nav class="mdl-navigation">
+                    <ul>
+                        <!--<li id="profile"></li>
+                        <li id="login">
+                            <a href="#" class="mdl-button mdl-button--raised mdl-button--accent">Sign in with Google</a>
+                        </li>-->
+                    </ul>
+                </nav>
             </div>
-        </footer>
-    </main>
+        </header>
+        <main class="mdl-layout__content">
+            <div id="container">
+
+
+            </div>
+        </main>
+    </app-main>
+    <footer class="mdl-mini-footer">
+        <div class="mdl-mini-footer__left-section">
+            <div class="mdl-logo">Pamescan</div>
+            <div class="mdl-mega-footer__bottom-section">
+                <p>This demo is written in Dart and uses Firebase.<br></p>
+            </div>
+            <ul class="mdl-mini-footer__link-list">
+                <li><a href="https://www.dartlang.org/" target="_blank">Dart</a></li>
+                <li><a href="https://firebase.google.com/" target="_blank">Firebase</a></li>
+                <li><a href="https://pub.dartlang.org/packages/firebase" target="_blank">Firebase Dart</a></li>
+                <li>Created by <a href="https://github.com/pamescan" target="_blank">Pablo Mestre Canto</a></li>
+                <li>Based on a <a href="https://twitter.com/Janamou" target="_blank">Jana Moudrá</a> Demo</li>
+            </ul>
+        </div>
+    </footer>
+
 </div>
 
-<div id="card-template" class="mdl-card mdl-cell mdl-cell--4-col section--center mdl-shadow--2dp" style="display: none">
-    <div class="mdl-card__supporting-text note-text">
-        <p></p>
-    </div>
-    <div class="mdl-card__actions note-actions">
-        <a href="#" title="Remove note" class="note-remove"><i class="material-icons">delete</i></a>
-    </div>
-</div>
 
 <script src="https://www.gstatic.com/firebasejs/3.5.0/firebase.js"></script>
 <script defer src="main.dart" type="application/dart"></script>
