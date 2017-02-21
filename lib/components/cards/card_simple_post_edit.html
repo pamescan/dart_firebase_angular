@@ -1,0 +1,36 @@
+<modal [visible]="isVisible">
+    <material-dialog class="max-height-dialog">
+
+        <!--<h3 header>Edit post</h3>-->
+
+
+        <div class="mdl-grid">
+            <h2 class="mdl-cell mdl-cell--12-col">Add new awesome note</h2>
+            <div class="mdl-cell mdl-cell--6-col mdl-cell--12-col-phone mdl-cell--12-col-tablet">
+                <material-input floatingLabel label="Title" [(ngModel)]="post.title"></material-input><br>
+                <material-input floatingLabel multiline rows="5" label="Content" [(ngModel)]="post.text"></material-input>
+            </div>
+            <div class="mdl-cell mdl-cell--6-col mdl-cell--12-col-phone mdl-cell--12-col-tablet" id="note-image">
+                <label for="upload-image">Attach image</label><br>
+                <material-input floatingLabel leadingGlyph="link" label="Link" [(ngModel)]="post.imageUrl"></material-input><br>
+                <label>OR</label><br>
+                <input type="file" id="upload-image" accept="image/*" disabled>
+            </div>
+
+        </div>
+
+
+        <div footer>
+
+            <material-button class="white" (click)="onClickUpdate()">
+                <glyph icon="update"></glyph>
+                Update
+            </material-button>
+            <material-button autoFocus (click)="onClickCancel()" class="white">
+                <glyph icon="cancel"></glyph>
+                Cancel
+            </material-button>
+        </div>
+
+    </material-dialog>
+</modal>

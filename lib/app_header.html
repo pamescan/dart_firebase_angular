@@ -6,7 +6,7 @@
         <nav class="mdl-navigation">
             <ul>
                 <li id="profile" >
-                    <img [hidden]="!showProfile"src="{{firebaseService.user?.photoURL}}" width="40"   height="40" ) >
+                    <img [hidden]="!showProfile"src="{{firebaseService.user?.photoURL}}" width="40"   height="40"  >
                     <p [hidden]="!showProfile"> {{firebaseService.user?.displayName}} ({{firebaseService.user?.email}})</p>
                     <a [hidden]="!showProfile" href="#" class="mdl-button mdl-button--raised mdl-button--accent" (click)="onLogOut()">Sign Out</a>
                 </li>

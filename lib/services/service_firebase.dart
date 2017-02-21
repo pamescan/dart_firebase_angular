@@ -1,11 +1,13 @@
 import 'dart:async';
 import 'package:angular2/core.dart';
 import 'package:firebase/firebase.dart' as fb;
-
+import 'package:pamescan/services/service_simple_post.dart';
 import 'package:pamescan/items/SimplePost.dart';
 
 @Injectable()
 class FirebaseService {
+
+  //final SimplePostService sps;
   final fb.Auth auth;
   final fb.DatabaseReference databaseRef;
   final fb.StorageReference storageRef;
@@ -42,6 +44,18 @@ class FirebaseService {
   }
 
   _setStorageListener() {
+    //sps.setStorageListener(databaseRef);
+
+    // Setups listening on the child_changed event on the database ref
+    databaseRef.onChildChanged.listen((e) {
+      // Snapshot of the data.
+      fb.DataSnapshot data = e.snapshot;
+      // Value of data from snapshot.
+      var val = data.val();
+      var item = new SimplePost(
+          val[jsonTagText], val[jsonTagTitle], val[jsonTagImgUrl], data.key);
+      _updateItem(item);
+    });
     // Setups listening on the child_added event on the database ref.
     databaseRef.onChildAdded.listen((e) {
       // Snapshot of the data.
@@ -102,10 +116,27 @@ class FirebaseService {
       print("Error in deleting $key: $e");
     }
   }
+  updateItem(SimplePost item)async{
+    try {
+      await databaseRef.child(item.key)
+          .update(SimplePost.toMap(item));
+    } catch (e) {
+      print("Error in writing to database: $e");
+    }
+  }
+
+  SimplePost getItem(String key){
+    return postList.firstWhere((post) => post.key == key);
+  }
 
   // Removes item with a key from local list
   _removeItem(String key) {
     postList.remove(postList.firstWhere((post) => post.key == key));
+  }
+
+  _updateItem(SimplePost post) {
+    int position = postList.indexOf(postList.firstWhere((e) => e.key == post.key));
+    postList[position] = post;
   }
 
   logOut() {

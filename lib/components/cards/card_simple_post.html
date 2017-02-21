@@ -1,0 +1,20 @@
+<div class="card" id="post-{{post.key}}">
+    <div class="card-image">
+        <img class="img-responsive" src="{{post.imageUrl}}">
+        <span class="card-title">{{post.title}}</span>
+    </div>
+
+    <div class="card-content">
+        <p>{{post.text}}</p>
+    </div>
+
+    <div class="card-action">
+        <!--<a >Link</a>
+        <a >Link</a>
+        <a >Link</a>-->
+        <material-button  (click)="onClickEdit()"><glyph icon="edit"></glyph></material-button>
+        <material-button  (click)="onClickDelete()"><glyph icon="delete"></glyph></material-button>
+        <!--<a ><glyph icon="delete"></glyph></a>
+        <a><i class="material-icons">delete</i></a>-->
+    </div>
+</div>
