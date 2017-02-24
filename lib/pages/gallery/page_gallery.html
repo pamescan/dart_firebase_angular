@@ -1,18 +1,19 @@
-<!--<material-button (trigger)="showDialog = true"                 raised                 class="blue">
-    Open Max Height
-</material-button>-->
-<div class="container-fluid">
-    <div class="container">
-        <button (click)="onAddItemClick()" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
-            <i class="material-icons">add</i>
-        </button>
-        <div class="row">
-            <div class="col-sm-6 col-md-4" *ngFor="let post of fbs.postList ">
-                <card-simple-post [post]="post" (delete)="onDeleteItem($event)" (edit)="onEditItem($event)"></card-simple-post>
-            </div>
+<div class="container">
+    <button id="add-button" [disabled]="!isUserLogged" (click)="onAddItemClick()" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+        <i class="material-icons">add</i>
+    </button>
+    <!--<div class="row">
+        <div class="col-sm-6 col-md-4" *ngFor="let post of fbs.postList ">
+            <card-simple-post [post]="post" (delete)="onDeleteItem($event)" (edit)="onEditItem($event)"></card-simple-post>
+        </div>
+    </div>-->
+    <div  class="mdl-grid">
+
+        <div class="mdl-card mdl-cell mdl-cell--4-col section--center mdl-shadow--2dp"  *ngFor="let post of firebaseService.postList ">
+            <card-simple-post [post]="post" [disabledButtons]="!isUserLogged" (delete)="onDeleteItem($event)" (edit)="onEditItem($event)"></card-simple-post>
         </div>
     </div>
-    <card-simple-post-edit [post]="selectedPost" [(isVisible)]="showDialog" (onUpdate)="updateItem($event)" ></card-simple-post-edit>
-
 </div>
+<card-simple-post-edit [post]="selectedPost" [(isVisible)]="showDialog" (onUpdate)="updateItem($event)"></card-simple-post-edit>
+
 

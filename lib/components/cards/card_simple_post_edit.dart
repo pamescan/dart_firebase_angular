@@ -2,6 +2,7 @@ import 'package:angular2/core.dart';
 import 'package:pamescan/items/SimplePost.dart';
 import 'package:angular2_components/angular2_components.dart';
 
+
 @Component(
   selector: 'card-simple-post-edit',
   styleUrls: const ['card_simple_post.css'],

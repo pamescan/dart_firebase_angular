@@ -1,61 +1,18 @@
-body{
-    //background:url('http://www.wallpaperup.com/uploads/wallpapers/2012/10/21/20181/cad2441dd3252cf53f12154412286ba0.jpg');
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
 
-    background:url('http://www.wallpaperup.com/uploads/wallpapers/2014/01/18/231338/4112a41bf84af0914bd288aca5d4c960.jpg') no-repeat center center fixed;
-    padding:50px;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+body *:not(.material-icons) {
+    font-family: 'Montserrat', sans-serif !important;
+}
+.mdl-logo {
+    margin-bottom: 5px;
+    font-size: 18px;
 }
 
-#login-dp{
-    min-width: 250px;
-    padding: 14px 14px 0;
-    overflow:hidden;
-    background-color:rgba(255,255,255,.8);
+.mdl-mega-footer__bottom-section {
+    padding-top: 0;
+    clear: both;
 }
-#login-dp .help-block{
-    font-size:12px
-}
-#login-dp .bottom{
-    background-color:rgba(255,255,255,.8);
-    border-top:1px solid #ddd;
-    clear:both;
-    padding:14px;
-}
-#login-dp .social-buttons{
-    margin:12px 0
-}
-#login-dp .social-buttons a{
-    width: 49%;
-}
-#login-dp .form-group {
-    margin-bottom: 10px;
-}
-.btn-fb{
-    color: #fff;
-    background-color:#3b5998;
-}
-.btn-fb:hover{
-    color: #fff;
-    background-color:#496ebc
-}
-.btn-tw{
-    color: #fff;
-    background-color:#55acee;
-}
-.btn-tw:hover{
-    color: #fff;
-    background-color:#59b5fa;
-}
-@media(max-width:768px){
-    #login-dp{
-        background-color: inherit;
-        color: #fff;
-    }
-    #login-dp .bottom{
-        background-color: inherit;
-        border-top:0 none;
-    }
+
+.mdl-mega-footer__bottom-section p {
+    font-size: 16px;
 }

@@ -43,45 +43,35 @@ class FirebaseService {
     });
   }
 
-  _setStorageListener() {
-    //sps.setStorageListener(databaseRef);
+  _onChildChanged(String key, Map val) {
+    _updateItem(new SimplePost.fromMap(val));
+  }
 
+  _onChildAdded(String key, Map val) {
+    var temp=new SimplePost.fromMap(val);
+    temp.key=key;
+
+    postList.add(temp);
+  }
+  _onChildRemoved(String key, Map val) {
+    _removeItem(key);
+  }
+
+  _setStorageListener() {
     // Setups listening on the child_changed event on the database ref
     databaseRef.onChildChanged.listen((e) {
-      // Snapshot of the data.
-      fb.DataSnapshot data = e.snapshot;
-      // Value of data from snapshot.
-      var val = data.val();
-      var item = new SimplePost(
-          val[jsonTagText], val[jsonTagTitle], val[jsonTagImgUrl], data.key);
-      _updateItem(item);
+      _onChildChanged(e.snapshot.key, e.snapshot.val());
+
     });
     // Setups listening on the child_added event on the database ref.
     databaseRef.onChildAdded.listen((e) {
-      // Snapshot of the data.
-      fb.DataSnapshot data = e.snapshot;
+      _onChildAdded(e.snapshot.key, e.snapshot.val());
 
-      // Value of data from snapshot.
-      var val = data.val();
-      // Creates a new SimplePost item. It is possible to retrieve a key from data.
-      var item = new SimplePost(
-          val[jsonTagText], val[jsonTagTitle], val[jsonTagImgUrl], data.key);
-      postList.add(item);
-      //_showItem(item);
     });
     // Setups listening on the child_removed event on the database ref.
     databaseRef.onChildRemoved.listen((e) {
-      fb.DataSnapshot data = e.snapshot;
-      var val = data.val();
+      _onChildRemoved(e.snapshot.key, e.snapshot.val());
 
-      // Removes also the image from storage.
-      var imageUrl = val[jsonTagImgUrl];
-      if (imageUrl != null) {
-        //removeItemImage(imageUrl);
-      }
-
-      _removeItem(data.key);
-      //_clearItem(data.key);
     });
   }
 
@@ -116,7 +106,8 @@ class FirebaseService {
       print("Error in deleting $key: $e");
     }
   }
-  updateItem(SimplePost item)async{
+
+  updateItem(SimplePost item) async {
     try {
       await databaseRef.child(item.key)
           .update(SimplePost.toMap(item));
@@ -125,7 +116,7 @@ class FirebaseService {
     }
   }
 
-  SimplePost getItem(String key){
+  SimplePost getItem(String key) {
     return postList.firstWhere((post) => post.key == key);
   }
 

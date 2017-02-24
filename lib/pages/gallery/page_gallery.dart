@@ -10,6 +10,7 @@ import 'package:pamescan/items/SimplePost.dart';
 import 'package:pamescan/components/cards/card_simple_post_edit.dart';
 import 'package:pamescan/components/cards/card_simple_post.dart';
 
+import 'package:pamescan/utils/utils.dart';
 
 @Component(
   selector: 'page-gallery',
@@ -19,33 +20,36 @@ import 'package:pamescan/components/cards/card_simple_post.dart';
   providers: const [FirebaseService],
   )
 class PageGallery {
-  final FirebaseService fbs;
+  final FirebaseService firebaseService;
 
   bool showDialog = false;
   SimplePost selectedPost;
+  bool get isUserLogged=> firebaseService.isUserLogged;
 
 
-  PageGallery(this.fbs) {
+  PageGallery(this.firebaseService) {
     selectedPost = new SimplePost("");
   }
 
   onAddItemClick() {
-    SimplePost simplePost = new SimplePost("a", "b", "https://dummyimage.com/317x211/000/fff&text=example");
-    fbs.postItem(simplePost);
+    var color1=utils.getRandomBasicColor();
+    var color2=utils.getRandomBasicColor();
+    SimplePost simplePost = new SimplePost("Text", "Title", "https://dummyimage.com/317x211/${color1}/${color2}&text=test",firebaseService.user?.displayName,firebaseService.user?.uid);
+    firebaseService.postItem(simplePost);
   }
 
   onDeleteItem(key) {
-    fbs.delItem(key);
+    firebaseService.delItem(key);
   }
 
   onEditItem(key) {
-    selectedPost = fbs.getItem(key);
+    selectedPost = firebaseService.getItem(key);
     showDialog = true;
   }
 
   updateItem(event) {
     showDialog = false;
-    fbs.updateItem(event);
+    firebaseService.updateItem(event);
   }
 
   test(key) {

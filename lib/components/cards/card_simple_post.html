@@ -7,13 +7,23 @@
     <div class="card-content">
         <p>{{post.text}}</p>
     </div>
+    <div class="card-info">
 
+        <p><a [routerLink]="['User' ,{id: post.userKey}] ">{{post.userName}}</a></p>
+    </div>
     <div class="card-action">
         <!--<a >Link</a>
         <a >Link</a>
         <a >Link</a>-->
-        <material-button  (click)="onClickEdit()"><glyph icon="edit"></glyph></material-button>
-        <material-button  (click)="onClickDelete()"><glyph icon="delete"></glyph></material-button>
+        <!--<material-button [disabled]="disabledButtons" (click)="onClickEdit()"><glyph icon="edit"></glyph></material-button>
+        <material-button  (click)="onClickDelete()"><glyph icon="delete"></glyph></material-button>-->
+        <button [disabled]="disabledButtons" (click)="onClickEdit()" class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored">
+            <i class="material-icons">edit</i>
+        </button>
+        <button [disabled]="disabledButtons" (click)="onClickDelete()" class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored">
+            <i class="material-icons">delete</i>
+        </button>
+
         <!--<a ><glyph icon="delete"></glyph></a>
         <a><i class="material-icons">delete</i></a>-->
     </div>
