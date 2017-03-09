@@ -17,7 +17,7 @@ import 'package:lorem/lorem.dart';
   templateUrl: 'new_post.html',
   directives: const [materialDirectives],
   providers: const [],
-)
+  )
 class NewPost implements OnChanges, OnInit {
   @Input()
   String editKey = "";
@@ -53,18 +53,28 @@ class NewPost implements OnChanges, OnInit {
 
   ngOnInit() {}
 
+// Detects changes on input data
   ngOnChanges(changes) {
     var key = changes['editKey'].currentValue;
     if (key == null) return;
     showDialog = true;
 
-    post = firebaseService.getItem(key);
+    post = new SimplePost.fromMap(SimplePost.toMap(firebaseService.getItem(key)));
+    _drawImageOnCanvas(post.imageUrl);
+
+
+
+  }
+  _drawImageOnCanvas(String imageUrl){
+    ImageElement img = new ImageElement();
+    CanvasElement visibleCanvas = querySelector("#visible_canvas");
+    CanvasRenderingContext2D ctxVisible = visibleCanvas.getContext("2d");
+    img.src = imageUrl;
+    ctxVisible.drawImageScaled(img, 0, 0, visibleCanvas.width, visibleCanvas.height);
   }
 
-  onClickUpdate() async {
-    var imageUrl = await _sendFileToFirebase(utils.dataURItoBlob(canvas));
+  onClickSave() async {
 
-    post.imageUrl = imageUrl;
     post.userName = firebaseService.user?.displayName;
     post.userKey = firebaseService.user?.uid;
 
@@ -72,6 +82,8 @@ class NewPost implements OnChanges, OnInit {
     if (post.key != null) {
       firebaseService.updateItem(post);
     } else {
+      var imageUrl = await _sendFileToFirebase(utils.dataURItoBlob(canvas));
+      post.imageUrl = imageUrl;
       firebaseService.postItem(post);
     }
   }
@@ -113,6 +125,7 @@ class NewPost implements OnChanges, OnInit {
     });
   }
 
+// Send a new file to firebase storage and obtains file url
   Future<String> _sendFileToFirebase(file, {String filename}) async {
     var filename = "${firebaseService.user.uid}_${file.hashCode.toString()}.jpg";
     String Url;
@@ -123,13 +136,14 @@ class NewPost implements OnChanges, OnInit {
     return Url;
   }
 
+// Create a new fake post with random values
   fakePost() {
     var color1 = utils.getRandomBasicColor();
     var color2 = utils.getRandomBasicColor();
     Lorem lorem = new Lorem();
     lorem.createText(numParagraphs: 2, numSentences: 2);
     SimplePost post = new SimplePost(
-        lorem.createText(numParagraphs: 2, numSentences: 2),
+        lorem.createText(numParagraphs: 2, numSentences: 1),
         lorem.createSentence(sentenceLength: 5),
         "https://dummyimage.com/317x211/${color1}/${color2}&text=${lorem.createSentence(sentenceLength: 3) }",
         firebaseService.user?.displayName,

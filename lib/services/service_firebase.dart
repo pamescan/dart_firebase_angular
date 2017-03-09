@@ -46,7 +46,9 @@ class FirebaseService {
   }
 
   _onChildChanged(String key, Map val) {
-    _updateItem(new SimplePost.fromMap(val));
+    var temp = new SimplePost.fromMap(val);
+    temp.key = key;
+    _updateItem(temp);
   }
 
   _onChildAdded(String key, Map val) {
@@ -113,7 +115,7 @@ class FirebaseService {
     }
   }
 
-  // Obtain an post item by key
+  // Obtain a ref to post item by key
   SimplePost getItem(String key) {
     return _postList.firstWhere((post) => post.key == key);
   }
