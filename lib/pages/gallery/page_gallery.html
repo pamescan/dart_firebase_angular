@@ -1,7 +1,8 @@
 <div class="container">
-    <button id="add-button" [disabled]="!isUserLogged" (click)="onAddItemClick()" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+    <!--<button id="add-button" [disabled]="!isUserLogged" (click)="onAddItemClick()" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored visible-desktop">
         <i class="material-icons">add</i>
-    </button>
+    </button>-->
+    <new-post *ngIf="firebaseService.isUserLogged" [editKey]="editKey"></new-post>
     <!--<div class="row">
         <div class="col-sm-6 col-md-4" *ngFor="let post of fbs.postList ">
             <card-simple-post [post]="post" (delete)="onDeleteItem($event)" (edit)="onEditItem($event)"></card-simple-post>
@@ -13,7 +14,8 @@
             <card-simple-post [post]="post" [disabledButtons]="!isUserLogged" (delete)="onDeleteItem($event)" (edit)="onEditItem($event)"></card-simple-post>
         </div>
     </div>
+
 </div>
-<card-simple-post-edit [post]="selectedPost" [(isVisible)]="showDialog" (onUpdate)="updateItem($event)"></card-simple-post-edit>
+<!--<card-simple-post-edit [post]="newPost" [(isVisible)]="showDialog" (file)="addFile($event)" (onUpdate)="updateItem($event)" (onCancel)="onCancelEdit($event)"></card-simple-post-edit>-->
 
 

@@ -16,3 +16,26 @@ body *:not(.material-icons) {
 .mdl-mega-footer__bottom-section p {
     font-size: 16px;
 }
+
+.mdl-mini-footer{
+    padding:0;
+}
+
+.visible-mobile {
+    display: block !important;
+}
+
+.visible-desktop {
+    display: none !important;
+}
+
+
+@media all and (min-width: 768px) {
+    .visible-mobile {
+        display: none !important;
+    }
+
+    .visible-desktop {
+        display: block !important;
+    }
+}

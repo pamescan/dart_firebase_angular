@@ -9,50 +9,39 @@ import 'package:pamescan/services/service_firebase.dart';
 import 'package:pamescan/items/SimplePost.dart';
 import 'package:pamescan/components/cards/card_simple_post_edit.dart';
 import 'package:pamescan/components/cards/card_simple_post.dart';
-
-import 'package:pamescan/utils/utils.dart';
+import 'package:pamescan/components/new_post/new_post.dart';
 
 @Component(
   selector: 'page-gallery',
   styleUrls: const ['page_gallery.css'],
   templateUrl: 'page_gallery.html',
-  directives: const [materialDirectives, CardSimplePost, CardSimplePostEdit],
+  directives: const [materialDirectives, CardSimplePost, CardSimplePostEdit, NewPost],
   providers: const [FirebaseService],
-  )
+)
 class PageGallery {
   final FirebaseService firebaseService;
 
   bool showDialog = false;
   SimplePost selectedPost;
-  bool get isUserLogged=> firebaseService.isUserLogged;
+  SimplePost newPost;
 
+  String editKey;
 
-  PageGallery(this.firebaseService) {
-    selectedPost = new SimplePost("");
-  }
+  bool get isUserLogged => firebaseService.isUserLogged;
 
-  onAddItemClick() {
-    var color1=utils.getRandomBasicColor();
-    var color2=utils.getRandomBasicColor();
-    SimplePost simplePost = new SimplePost("Text", "Title", "https://dummyimage.com/317x211/${color1}/${color2}&text=test",firebaseService.user?.displayName,firebaseService.user?.uid);
-    firebaseService.postItem(simplePost);
-  }
+  PageGallery(this.firebaseService) {}
+
+  onAddItemClick() {}
 
   onDeleteItem(key) {
     firebaseService.delItem(key);
   }
 
   onEditItem(key) {
-    selectedPost = firebaseService.getItem(key);
-    showDialog = true;
+    editKey = key;
   }
 
-  updateItem(event) {
-    showDialog = false;
-    firebaseService.updateItem(event);
-  }
+  onCancelEdit(event) {}
 
-  test(key) {
-    print(key.toString());
-  }
+  updateItem(event) {}
 }

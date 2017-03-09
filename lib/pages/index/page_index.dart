@@ -2,10 +2,6 @@
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
 import 'package:angular2/core.dart';
-//import 'package:angular2_components/angular2_components.dart';
-
-
-
 
 @Component(
   selector: 'page-index',
@@ -13,8 +9,5 @@ import 'package:angular2/core.dart';
   templateUrl: 'page_index.html',
   directives: const [],
   providers: const [],
-  )
-
-class PageIndex {
-
-}
+)
+class PageIndex {}

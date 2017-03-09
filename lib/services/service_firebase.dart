@@ -1,29 +1,32 @@
+// Copyright (c) 2017, pablo.mestre. All rights reserved. Use of this source code
+
+// is governed by a BSD-style license that can be found in the LICENSE file.
+
 import 'dart:async';
+
 import 'package:angular2/core.dart';
 import 'package:firebase/firebase.dart' as fb;
-import 'package:pamescan/services/service_simple_post.dart';
+
 import 'package:pamescan/items/SimplePost.dart';
 
 @Injectable()
 class FirebaseService {
-
-  //final SimplePostService sps;
   final fb.Auth auth;
   final fb.DatabaseReference databaseRef;
   final fb.StorageReference storageRef;
 
   fb.UserInfo user; //logged user info
-  List<SimplePost> postList;
-
+  List<SimplePost> _postList;
 
   bool get isUserLogged => user != null;
 
+  get postList => _postList.reversed;
+
   FirebaseService()
-      :
-        auth = fb.auth(),
+      : auth = fb.auth(),
         databaseRef = fb.database().ref("test"),
         storageRef = fb.storage().ref("test") {
-    this.postList = [];
+    this._postList = [];
     _setAuthListener();
     _setStorageListener();
   }
@@ -33,13 +36,12 @@ class FirebaseService {
     // When the state of auth changes (user logs in/logs out).
     auth.onAuthStateChanged.listen((e) {
       this.user = e.user;
+
       _clearProfile();
 
-      if (user != null) {
-        _loadProfile(user);
-      } else {
-
-      }
+      if (this.user != null) {
+        _loadProfile(this.user);
+      } else {}
     });
   }
 
@@ -48,11 +50,12 @@ class FirebaseService {
   }
 
   _onChildAdded(String key, Map val) {
-    var temp=new SimplePost.fromMap(val);
-    temp.key=key;
+    var temp = new SimplePost.fromMap(val);
+    temp.key = key;
 
-    postList.add(temp);
+    _postList.add(temp);
   }
+
   _onChildRemoved(String key, Map val) {
     _removeItem(key);
   }
@@ -61,20 +64,16 @@ class FirebaseService {
     // Setups listening on the child_changed event on the database ref
     databaseRef.onChildChanged.listen((e) {
       _onChildChanged(e.snapshot.key, e.snapshot.val());
-
     });
     // Setups listening on the child_added event on the database ref.
     databaseRef.onChildAdded.listen((e) {
       _onChildAdded(e.snapshot.key, e.snapshot.val());
-
     });
     // Setups listening on the child_removed event on the database ref.
     databaseRef.onChildRemoved.listen((e) {
       _onChildRemoved(e.snapshot.key, e.snapshot.val());
-
     });
   }
-
 
   // Logins with the Google auth provider.
   Future loginWithGoogle() async {
@@ -90,9 +89,7 @@ class FirebaseService {
   // Pushes a new item as a Map to database.
   postItem(SimplePost item) async {
     try {
-      await databaseRef
-          .push(SimplePost.toMap(item))
-          .future;
+      await databaseRef.push(SimplePost.toMap(item)).future;
     } catch (e) {
       print("Error in writing to database: $e");
     }
@@ -107,39 +104,45 @@ class FirebaseService {
     }
   }
 
+  // Update item in database
   updateItem(SimplePost item) async {
     try {
-      await databaseRef.child(item.key)
-          .update(SimplePost.toMap(item));
+      await databaseRef.child(item.key).update(SimplePost.toMap(item));
     } catch (e) {
       print("Error in writing to database: $e");
     }
   }
 
+  // Obtain an post item by key
   SimplePost getItem(String key) {
-    return postList.firstWhere((post) => post.key == key);
+    return _postList.firstWhere((post) => post.key == key);
+  }
+
+  addFile(var file, String filename) async {
+    try {
+      var snapshot = await storageRef.child(filename).put(file).future;
+      return snapshot.downloadURL.toString();
+    } catch (e) {
+      print("Error in uploading to database: $e");
+    }
   }
 
   // Removes item with a key from local list
   _removeItem(String key) {
-    postList.remove(postList.firstWhere((post) => post.key == key));
+    _postList.remove(_postList.firstWhere((post) => post.key == key));
   }
 
   _updateItem(SimplePost post) {
-    int position = postList.indexOf(postList.firstWhere((e) => e.key == post.key));
-    postList[position] = post;
+    int position = _postList.indexOf(_postList.firstWhere((e) => e.key == post.key));
+    _postList[position] = post;
   }
 
   logOut() {
     auth.signOut();
-    postList = [];
+    _postList = [];
   }
 
-  _clearProfile() {
+  _clearProfile() {}
 
-  }
-
-  _loadProfile(var user) {
-
-  }
+  _loadProfile(var user) {}
 }

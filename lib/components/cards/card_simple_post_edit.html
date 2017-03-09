@@ -1,49 +1,24 @@
-<!--<modal [visible]="isVisible">
-    <material-dialog class="max-height-dialog">
-
-        <!--<h3 header>Edit post</h3>-->
-<!--        <div class="mdl-grid">
-            <h2 class="mdl-cell mdl-cell--8-col">Post</h2>
-                <div class="mdl-cell mdl-cell--6-col mdl-cell--12-col-phone mdl-cell--12-col-tablet">
-                    <material-input floatingLabel label="Title" [(ngModel)]="post.title"></material-input>
-                    <br>
-                    <material-input floatingLabel multiline rows="5" label="Content" [(ngModel)]="post.text"></material-input>
-                </div>
-            <div class="mdl-cell mdl-cell--6-col mdl-cell--12-col-phone mdl-cell--12-col-tablet" id="note-image">
-                <label for="upload-image">Attach image</label><br>
-                <material-input floatingLabel leadingGlyph="link" label="Link" [(ngModel)]="post.imageUrl"></material-input>
-                <br>
-                <label>OR</label><br>
-                <input type="file" id="upload-image" accept="image/*" disabled>
-            </div>
-        </div>
-        <div footer>
-            <material-button class="white" (click)="onClickUpdate()">
-                <glyph icon="update"></glyph>
-                Update
-            </material-button>
-            <material-button autoFocus (click)="onClickCancel()" class="white">
-                <glyph icon="cancel"></glyph>
-                Cancel
-            </material-button>
-        </div>
-    </material-dialog>
-</modal>-->
 
 <modal [visible]="isVisible">
     <material-dialog class="basic-scrolling-dialog">
         <h3 header>Edit Post</h3>
+
         <div class="mdl-grid">
+            <!--<div class="card-image">
+                <img id="initimage" class="img-responsive" src="{{post.imageUrl}}">
+            </div>-->
+            <canvas id="image_canvas"></canvas>
             <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet">
                 <material-input floatingLabel label="Title" [(ngModel)]="post.title"></material-input>
                 <br>
                 <material-input floatingLabel multiline rows="5" label="Content" [(ngModel)]="post.text"></material-input>
             </div>
+<!--
             <div class="mdl-cell mdl-cell--4-col mdl-cell--6-col-tablet"></div>
-            <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-phone"></div>
+            <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-phone"></div>-->
         </div>
 
-        <div footer>
+        <div footer class="visible-mobile">
             <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" (click)="onClickUpdate()">
                 <i class="material-icons">update</i>
                 Update

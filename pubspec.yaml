@@ -9,8 +9,12 @@ dependencies:
   firebase: any
   http: any
   stream_transformers: any
+  image: any
 dev_dependencies:
+  test: '^0.12.6'
+  #angular2_testing: any
   browser: ^0.10.0
+  lorem: any
   dart_to_js_script_rewriter: ^1.0.1
 transformers:
 - angular2:
