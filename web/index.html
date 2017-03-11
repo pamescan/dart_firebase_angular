@@ -7,45 +7,64 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
     <link rel="stylesheet" href="css/styles2.css">
+    <link rel="stylesheet" href="css/loading.css">
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 
 </head>
 <body>
 <app-main>
-<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-    <header class="mdl-layout__header">
-        <div class="mdl-layout-icon"></div>
-        <div class="mdl-layout-spacer"></div>
-        <div class="mdl-layout__header-row">
-            <span class="mdl-layout__title">Pamescan Demo</span>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <header class="mdl-layout__header">
+            <div class="mdl-layout-icon"></div>
             <div class="mdl-layout-spacer"></div>
-            <nav class="mdl-navigation">
-             </nav>
-        </div>
-    </header>
-
-    <main class="mdl-layout__content">
-    </main>
-    <footer class="mdl-mini-footer">
-        <div class="mdl-mini-footer__left-section">
-            <div class="mdl-logo">Pamescan</div>
-            <div class="mdl-mega-footer__bottom-section">
-                <p>This demo is written in Dart and uses Firebase.<br></p>
+            <div class="mdl-layout__header-row">
+                <span class="mdl-layout__title">Pamescan Demo</span>
+                <div class="mdl-layout-spacer"></div>
+                <nav class="mdl-navigation">
+                </nav>
             </div>
-            <ul class="mdl-mini-footer__link-list">
-                <li><a href="https://www.dartlang.org/" target="_blank">Dart</a></li>
-                <li><a href="https://firebase.google.com/" target="_blank">Firebase</a></li>
-                <li><a href="https://pub.dartlang.org/packages/firebase" target="_blank">Firebase Dart</a></li>
+        </header>
 
-            </ul>
-            <ul class="mdl-mini-footer__link-list">
-                <li>Created by <a href="https://github.com/pamescan" target="_blank">Pablo Mestre Canto</a></li>
-                <li>Based on a <a href="https://twitter.com/Janamou" target="_blank">Jana Moudrá</a> Demo</li>
-            </ul>
+        <div class="mdl-grid">
+            <div class="mdl-layout-spacer"></div>
+            <div class="mdl-cell mdl-cell--4-col">
+                <div class="card" >
+                    <div class="card-image">
+                        <div class="spinner">
+                            <span class="loading">Loading...</span>
+
+                            <div class="rect1"></div>
+                            <div class="rect2"></div>
+                            <div class="rect3"></div>
+                            <div class="rect4"></div>
+                            <div class="rect5"></div>
+                        </div>
+                        </my-app>
+                    </div>
+                </div>
+            </div>
+            <div class="mdl-layout-spacer"></div>
         </div>
-    </footer>
+        <footer class="mdl-mini-footer">
+            <div class="mdl-mini-footer__left-section">
+                <div class="mdl-logo">Pamescan</div>
+                <div class="mdl-mega-footer__bottom-section">
+                    <p>This demo is written in Dart and uses Firebase and Angular.<br></p>
+                </div>
+                <ul class="mdl-mini-footer__link-list">
+                    <li><a href="https://www.dartlang.org/" target="_blank">Dart</a></li>
+                    <li><a href="https://firebase.google.com/" target="_blank">Firebase</a></li>
+                    <li><a href="https://pub.dartlang.org/packages/firebase" target="_blank">Firebase Dart</a></li>
 
-</div>
+                </ul>
+                <ul class="mdl-mini-footer__link-list">
+                    <li>Created by <a href="https://github.com/pamescan" target="_blank">Pablo Mestre Canto</a></li>
+                    <li>Based on a <a href="https://twitter.com/Janamou" target="_blank">Jana Moudrá</a> Demo</li>
+                </ul>
+            </div>
+        </footer>
+
+    </div>
 </app-main>
 <script src="https://www.gstatic.com/firebasejs/3.5.0/firebase.js"></script>
 <script defer src="main.dart" type="application/dart"></script>
