@@ -12,11 +12,7 @@
         <p><a [routerLink]="['User' ,{id: post.userKey}] ">{{post.userName}}</a></p>
     </div>
     <div class="card-action">
-        <!--<a >Link</a>
-        <a >Link</a>
-        <a >Link</a>-->
-        <!--<material-button [disabled]="disabledButtons" (click)="onClickEdit()"><glyph icon="edit"></glyph></material-button>
-        <material-button  (click)="onClickDelete()"><glyph icon="delete"></glyph></material-button>-->
+
         <button [disabled]="disabledButtons" (click)="onClickEdit()" class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored">
             <i class="material-icons">edit</i>
         </button>
@@ -24,7 +20,5 @@
             <i class="material-icons">delete</i>
         </button>
 
-        <!--<a ><glyph icon="delete"></glyph></a>
-        <a><i class="material-icons">delete</i></a>-->
     </div>
 </div>
