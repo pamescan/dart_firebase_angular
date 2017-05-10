@@ -6,11 +6,13 @@ import 'dart:async';
 
 import 'package:angular2/core.dart';
 import 'package:firebase/firebase.dart' as fb;
+import 'package:pamescan/services/service_message.dart';
 
-import 'package:pamescan/items/SimplePost.dart';
+import 'package:pamescan/models/SimplePost.dart';
 
 @Injectable()
 class FirebaseService {
+  final MessageService msgService;
   final fb.Auth auth;
   final fb.DatabaseReference databaseRef;
   final fb.StorageReference storageRef;
@@ -22,13 +24,13 @@ class FirebaseService {
 
   get postList => _postList.reversed;
 
-  FirebaseService()
+  FirebaseService(this.msgService)
       : auth = fb.auth(),
         databaseRef = fb.database().ref("test"),
         storageRef = fb.storage().ref("test") {
     this._postList = [];
     _setAuthListener();
-    _setStorageListener();
+    _setDatabaseListener();
   }
 
   // Sets the auth event listener.
@@ -62,17 +64,17 @@ class FirebaseService {
     _removeItem(key);
   }
 
-  _setStorageListener() {
+  _setDatabaseListener() {
     // Setups listening on the child_changed event on the database ref
-    databaseRef.onChildChanged.listen((e) {
+    databaseRef.child("post").onChildChanged.listen((e) {
       _onChildChanged(e.snapshot.key, e.snapshot.val());
     });
     // Setups listening on the child_added event on the database ref.
-    databaseRef.onChildAdded.listen((e) {
+    databaseRef.child("post").onChildAdded.listen((e) {
       _onChildAdded(e.snapshot.key, e.snapshot.val());
     });
     // Setups listening on the child_removed event on the database ref.
-    databaseRef.onChildRemoved.listen((e) {
+    databaseRef.child("post").onChildRemoved.listen((e) {
       _onChildRemoved(e.snapshot.key, e.snapshot.val());
     });
   }
@@ -91,7 +93,9 @@ class FirebaseService {
   // Pushes a new item as a Map to database.
   postItem(SimplePost item) async {
     try {
-      await databaseRef.push(SimplePost.toMap(item)).future;
+      await databaseRef.child("post")
+          .push(SimplePost.toMap(item))
+          .future;
     } catch (e) {
       print("Error in writing to database: $e");
     }
@@ -100,7 +104,7 @@ class FirebaseService {
   // Removes item with a key from database.
   delItem(String key) async {
     try {
-      await databaseRef.child(key).remove();
+      await databaseRef.child("post").child(key).remove();
     } catch (e) {
       print("Error in deleting $key: $e");
     }
@@ -109,7 +113,7 @@ class FirebaseService {
   // Update item in database
   updateItem(SimplePost item) async {
     try {
-      await databaseRef.child(item.key).update(SimplePost.toMap(item));
+      await databaseRef.child("post").child(item.key).update(SimplePost.toMap(item));
     } catch (e) {
       print("Error in writing to database: $e");
     }
@@ -120,9 +124,13 @@ class FirebaseService {
     return _postList.firstWhere((post) => post.key == key);
   }
 
-  addFile(var file, String filename) async {
+  addFile(var path, var file, String filename) async {
     try {
-      var snapshot = await storageRef.child(filename).put(file).future;
+      var snapshot = await storageRef
+          .child(path)
+          .child(filename)
+          .put(file)
+          .future;
       return snapshot.downloadURL.toString();
     } catch (e) {
       print("Error in uploading to database: $e");
@@ -144,7 +152,11 @@ class FirebaseService {
     _postList = [];
   }
 
-  _clearProfile() {}
+  _clearProfile() {
+    msgService.clear();
+  }
 
-  _loadProfile(var user) {}
+  _loadProfile(var user) {
+    msgService.load(databaseRef,storageRef,user);
+  }
 }

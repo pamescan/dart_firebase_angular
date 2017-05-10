@@ -9,5 +9,5 @@ import 'package:firebase/firebase.dart' as fb;
 @Injectable()
 class SimplePostService {
   SimplePostService();
-  setStorageListener(fb.DatabaseReference dbr) {}
+  _setDatabaseListener(fb.DatabaseReference dbr) {}
 }

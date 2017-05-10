@@ -3,7 +3,7 @@
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
 import 'package:angular2/core.dart';
-import 'package:pamescan/items/SimplePost.dart';
+import 'package:pamescan/models/SimplePost.dart';
 import 'package:angular2_components/angular2_components.dart';
 import 'package:pamescan/services/service_firebase.dart';
 import 'dart:html';
@@ -130,7 +130,7 @@ class NewPost implements OnChanges, OnInit {
     var filename = "${firebaseService.user.uid}_${file.hashCode.toString()}.jpg";
     String Url;
 
-    await firebaseService.addFile(file, filename).then((e) {
+    await firebaseService.addFile('post',file, filename).then((e) {
       Url = e;
     });
     return Url;

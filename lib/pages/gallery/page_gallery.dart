@@ -6,7 +6,7 @@ import 'package:angular2/core.dart';
 import 'package:angular2_components/angular2_components.dart';
 import 'package:pamescan/services/service_firebase.dart';
 
-import 'package:pamescan/items/SimplePost.dart';
+import 'package:pamescan/models/SimplePost.dart';
 import 'package:pamescan/components/cards/card_simple_post_edit.dart';
 import 'package:pamescan/components/cards/card_simple_post.dart';
 import 'package:pamescan/components/new_post/new_post.dart';

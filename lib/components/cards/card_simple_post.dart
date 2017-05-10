@@ -3,7 +3,7 @@
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
 import 'package:angular2/core.dart';
-import 'package:pamescan/items/SimplePost.dart';
+import 'package:pamescan/models/SimplePost.dart';
 import 'package:angular2_components/angular2_components.dart';
 import 'package:angular2/router.dart';
 

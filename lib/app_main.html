@@ -36,6 +36,7 @@
 
             <a class="mdl-navigation__link" [routerLink]="['Index']">Index</a>
             <a class="mdl-navigation__link" [routerLink]="['Gallery']">Gallery</a>
+            <a [hidden]="!isUserLogged" class="mdl-navigation__link" [routerLink]="['Messages']">Chat</a>
             <!--<a class="mdl-navigation__link" [routerLink]="['Error']">Error</a>-->
         </nav>
     </div>

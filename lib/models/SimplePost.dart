@@ -2,7 +2,7 @@
 
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
-library pamescan.item;
+library pamescan.models;
 
 const String jsonTagKey = "key";
 const String jsonTagText = "text";
